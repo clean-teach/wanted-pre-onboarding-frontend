@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import SignInContainer from './containers/SignInContainer';
+import SignUpContainer from './containers/SignUpContainer';
+import TodosContainer from './containers/TodosContainer';
+import './styles/style.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <React.Fragment> https://reactjs-org-ko.netlify.app/docs/fragments.html
+    <React.Fragment>
+      <Routes>
+        <Route path="/" element={<SignInContainer />} />
+        <Route path="/signup" element={<SignUpContainer />} />
+        <Route path="/todos" element={<TodosContainer />} />
+      </Routes>
+    </React.Fragment>
   );
 }
 

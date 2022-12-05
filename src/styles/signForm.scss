@@ -1,0 +1,35 @@
+$pointColor: #228be6;
+
+.sign-form {
+    max-width: 480px;
+    label {display: none;}
+    input, button {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+    input {
+        & ~ input {
+            margin-top: 1rem;
+        }
+    }
+    .error {
+        color: #aa0000;
+        margin-top: 1rem;
+    }
+    .success {
+        color: $pointColor;
+        margin-top: 1rem;
+    }
+    hr {
+        margin: 2rem 0;
+    }
+    p {
+        font-size: .875rem;
+        color: #777777;
+        a {
+            color: #333333;
+        }
+    }
+}

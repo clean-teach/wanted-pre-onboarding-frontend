@@ -1,0 +1,33 @@
+.sign-form {
+  max-width: 480px;
+}
+.sign-form label {
+  display: none;
+}
+.sign-form input, .sign-form button {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+.sign-form input ~ input {
+  margin-top: 1rem;
+}
+.sign-form .error {
+  color: #aa0000;
+  margin-top: 1rem;
+}
+.sign-form .success {
+  color: #228be6;
+  margin-top: 1rem;
+}
+.sign-form hr {
+  margin: 2rem 0;
+}
+.sign-form p {
+  font-size: 0.875rem;
+  color: #777777;
+}
+.sign-form p a {
+  color: #333333;
+}/*# sourceMappingURL=signForm.css.map */
