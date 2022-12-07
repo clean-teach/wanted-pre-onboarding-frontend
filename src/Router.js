@@ -6,7 +6,7 @@ import TodosContainer from './containers/TodosContainer';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/wanted-pre-onboarding-frontend',
     element: <App />,
     children: [
       {
