@@ -12,15 +12,6 @@ const TodoItemLi = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .check {
-    width: auto;
-    padding: 0;
-    margin: 0;
-    line-height: 0;
-    margin-right: 1rem;
-    font-size: 1.5rem;
-    border-radius: 100%;
-  }
   .cont-area {
     width: 100%;
     box-sizing: border-box;
@@ -28,40 +19,40 @@ const TodoItemLi = styled.li`
     padding-right: 4rem;
     text-align: left;
   }
-  .button-wrap {
-    display: flex;
-    button {
-      width: auto;
-      padding: 0;
-      margin: 0;
-      background: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.875rem;
-      svg {
-        font-size: 1.5rem;
-        fill: rgba(0, 0, 0, 1);
-      }
-      & + button {
-        margin-left: 1rem;
-      }
-    }
-  }
-  .edit-area {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    button {
-      color: #333333;
-    }
-  }
   &.round-box {
     padding: 1rem;
     border-radius: 0.5rem;
     & + .round-box {
       margin-top: 1rem;
+    }
+  }
+`;
+const Check = styled.button`
+  width: auto;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  border-radius: 100%;
+`;
+const BtnWrap = styled.div`
+  display: flex;
+  button {
+    width: auto;
+    padding: 0;
+    margin: 0;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    svg {
+      font-size: 1.5rem;
+      fill: rgba(0, 0, 0, 1);
+    }
+    & + button {
+      margin-left: 1rem;
     }
   }
 `;
@@ -81,9 +72,9 @@ function TodoItem({
 }) {
   return (
     <TodoItemLi className="round-box" id={todoId}>
-      <button className="check" onClick={onToggle}>
+      <Check onClick={onToggle}>
         {isCompleted ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
-      </button>
+      </Check>
       {isEdit ? (
         <EditTodo
           todoText={todo}
@@ -100,14 +91,14 @@ function TodoItem({
         // />
         <>
           <p>{todo}</p>
-          <div className="button-wrap">
+          <BtnWrap>
             <button onClick={onEditMode}>
               <AiOutlineEdit />
             </button>
             <button onClick={onRemove}>
               <BiTrash />
             </button>
-          </div>
+          </BtnWrap>
         </>
       )}
     </TodoItemLi>

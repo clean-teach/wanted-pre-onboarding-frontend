@@ -65,6 +65,22 @@ const GlobalStyle = createGlobalStyle`
       padding: 0;
     }
   }
+  .primary-btn {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    font-size: 1.125rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    background-color: ${(props) => props.theme.pointColor};
+    color: #ffffff;
+    &:disabled {
+      background-color: #cccccc;
+      color: #666666;
+      cursor: default;
+    }
+  }
 `;
 
 const Layout = styled.div`
@@ -84,22 +100,6 @@ const Layout = styled.div`
     padding: 2rem 0;
     color: ${(props) => props.theme.pointColor};
     text-align: center;
-  }
-  button {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 1rem;
-    font-size: 1.125rem;
-    border: none;
-    border-radius: 0.5rem;
-    margin-top: 1rem;
-    background-color: ${(props) => props.theme.pointColor};
-    color: #ffffff;
-    &:disabled {
-      background-color: #cccccc;
-      color: #666666;
-      cursor: default;
-    }
   }
 `;
 

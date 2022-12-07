@@ -35,7 +35,8 @@ function TodoItemContainer({ todoItem }) {
     const currentId = Number(event.currentTarget.parentNode.parentNode.id);
 
     if (currentId) {
-      dispatch(removeTodoAsync(access_token, currentId));
+      const isRemove = window.confirm('정말 삭제 하시겠습니까?');
+      isRemove && dispatch(removeTodoAsync(access_token, currentId));
     }
   };
 
@@ -70,10 +71,6 @@ function TodoItemContainer({ todoItem }) {
       console.log('action 요청');
     }
   };
-
-  // useEffect(() => {
-
-  // }, [todos]);
 
   return (
     <TodoItem
