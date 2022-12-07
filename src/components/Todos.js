@@ -1,6 +1,5 @@
 import React from 'react';
 // import Error from './Error';
-import './../styles/todo.scss';
 import TodoItemContainer from '../containers/TodoItemContainer';
 import CreateTodoContainer from '../containers/CreateTodoContainer';
 
