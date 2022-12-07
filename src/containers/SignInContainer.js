@@ -56,7 +56,7 @@ function SignInContainer() {
         localStorage.setItem('loginToken', token);
         alert('로그인이 완료 되었습니다.');
         dispatch(successAction());
-        navigator('/todos');
+        navigator('todos');
       }
     } catch (error) {
       dispatch(errorAction(error));
@@ -65,7 +65,7 @@ function SignInContainer() {
 
   useEffect(() => {
     if (localStorage.getItem('loginToken')) {
-      navigator('/todos');
+      navigator('todos');
     }
   }, []);
 

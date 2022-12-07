@@ -41,7 +41,7 @@ function SignIn({
         <Error />
         <hr />
         <p>
-          아직 계정이 없으신가요? <Link to="/signup">회원가입 하러 가기 →</Link>
+          아직 계정이 없으신가요? <Link to="signup">회원가입 하러 가기 →</Link>
         </p>
       </div>
     </>

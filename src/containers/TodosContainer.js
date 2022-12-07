@@ -15,7 +15,7 @@ function TodosContainer() {
     // console.log('컴포넌트 나타남');
     const access_token = localStorage.getItem('loginToken');
     if (!access_token) {
-      navigator('/');
+      navigator('/wanted-pre-onboarding-frontend');
     }
     dispatch(getTodosAsync(access_token));
   }, []);

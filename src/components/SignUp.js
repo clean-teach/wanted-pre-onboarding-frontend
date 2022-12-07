@@ -77,7 +77,7 @@ function SignUp({
         <Error />
         <hr />
         <p>
-          <Link to="/">로그인 하러 가기 →</Link>
+          <Link to="/wanted-pre-onboarding-frontend">로그인 하러 가기 →</Link>
         </p>
       </div>
     </div>

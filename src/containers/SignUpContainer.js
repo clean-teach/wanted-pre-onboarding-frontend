@@ -60,8 +60,7 @@ function SignUpContainer() {
         console.log(response);
         alert('회원가입이 완료 되었습니다.');
         dispatch(successAction());
-        navigator('/');
-        // dispatch(signIn(error));
+        navigator('/wanted-pre-onboarding-frontend');
       }
     } catch (error) {
       dispatch(errorAction(error));
