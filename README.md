@@ -1,6 +1,6 @@
 # ★★★ 배포 링크 ★★★
 
-아래 "배포 링크" 버튼을 클릭하시면, 배포된 프로젝트로 이동 하실 수 있습니다.
+"배포 링크" 버튼을 클릭하시면, 배포된 프로젝트로 이동 하실 수 있습니다. ->
 [배포 링크](https://clean-teach.github.io/wanted-pre-onboarding-frontend)
 
 # Getting Started with Create React App
