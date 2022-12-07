@@ -65,6 +65,7 @@ function SignUp({
           ) : null}
           <button
             type="submit"
+            className="primary-btn"
             disabled={
               isValidationEmail && isValidationPW && isValidationPW2
                 ? false

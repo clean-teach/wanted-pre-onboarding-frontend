@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
+import Header from './components/Header';
 
 const defaultheme = {
   pointColor: '#228be6',
@@ -52,7 +53,6 @@ const GlobalStyle = createGlobalStyle`
   .round-box {
     width: 100%;
     min-width: 320px;
-    max-width: 640px;
     box-sizing: border-box;
     margin: auto;
     padding: 2rem;
@@ -104,14 +104,22 @@ const Layout = styled.div`
 `;
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('loginToken')) {
+      setIsLogin(true);
+    }
+  }, []);
+
   return (
     // <React.Fragment> https://reactjs-org-ko.netlify.app/docs/fragments.html
     <React.Fragment>
       <Reset />
       <ThemeProvider theme={defaultheme}>
         <GlobalStyle />
+        <Header isLogin={isLogin} setIsLogin={setIsLogin} />
         <Layout>
-          <Outlet />
+          <Outlet context={{ setIsLogin: setIsLogin, isLogin: isLogin }} />
         </Layout>
       </ThemeProvider>
     </React.Fragment>

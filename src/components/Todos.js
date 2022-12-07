@@ -2,10 +2,15 @@ import React from 'react';
 // import Error from './Error';
 import TodoItemContainer from '../containers/TodoItemContainer';
 import CreateTodoContainer from '../containers/CreateTodoContainer';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 640px;
+`;
 
 function Todos({ todos }) {
   return (
-    <div>
+    <Container>
       <CreateTodoContainer />
       {todos ? (
         <ul>
@@ -15,7 +20,7 @@ function Todos({ todos }) {
         </ul>
       ) : null}
       {/* <Error /> */}
-    </div>
+    </Container>
   );
 }
 

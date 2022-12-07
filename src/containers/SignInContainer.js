@@ -3,9 +3,10 @@ import axios from 'axios';
 import SignIn from '../components/SignIn';
 import { useDispatch } from 'react-redux';
 import { errorAction, loadingAction, successAction } from '../modules/common';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 function SignInContainer() {
+  const { setIsLogin } = useOutletContext();
   const navigator = useNavigate();
   const dispatch = useDispatch();
 
@@ -56,6 +57,7 @@ function SignInContainer() {
         localStorage.setItem('loginToken', token);
         alert('로그인이 완료 되었습니다.');
         dispatch(successAction());
+        setIsLogin(true);
         navigator('todos');
       }
     } catch (error) {

@@ -10,9 +10,9 @@ function SignIn({
   isValidationPW,
 }) {
   return (
-    <>
+    <div className="sign-area round-box">
       <h2>로그인</h2>
-      <div className="sign-form round-box">
+      <div className="sign-form">
         <form onSubmit={onSignin}>
           <label htmlFor="userEmail">이메일</label>
           <input
@@ -33,6 +33,7 @@ function SignIn({
           />
           <button
             type="submit"
+            className="primary-btn"
             disabled={isValidationEmail && isValidationPW ? false : true}
           >
             로그인
@@ -44,7 +45,7 @@ function SignIn({
           아직 계정이 없으신가요? <Link to="signup">회원가입 하러 가기 →</Link>
         </p>
       </div>
-    </>
+    </div>
   );
 }
 
