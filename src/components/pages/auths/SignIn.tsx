@@ -2,15 +2,18 @@ import { useState } from 'react';
 import { useForm, UseFormWatch } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchSignIn } from '../../../apis/auths';
-import { AuthArea } from '../../../styles/GlobalStyle';
+import { AuthArea } from '../../../assets/styles/GlobalStyle';
 import { ISignInForm } from '../../../types/authComponentTypes';
 import { regExpEmail } from '../../../utils/regexp';
 import { LOCALSTORAGE_KEY_LOGIN_TOKEN } from '../../../utils/strings';
+import { useSetRecoilState } from 'recoil';
+import { atomIsAccess } from '../../../atoms/atoms';
 
 function SignIn() {
-  const { register, watch, handleSubmit } = useForm<ISignInForm>();
   const [fetchError, setFetchError] = useState(null);
+  const { register, watch, handleSubmit } = useForm<ISignInForm>();
   const navigate = useNavigate();
+  const IsAccess = useSetRecoilState(atomIsAccess);
 
   const getValidSignInFrom = (watch: UseFormWatch<ISignInForm>) => {
     const successEmail = regExpEmail.test(watch().email);
@@ -28,12 +31,12 @@ function SignIn() {
       password: inputData.password,
     })
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           window.localStorage.setItem(
             LOCALSTORAGE_KEY_LOGIN_TOKEN,
             response.data.access_token,
           );
+          IsAccess(true);
           navigate('/todo');
         }
       })

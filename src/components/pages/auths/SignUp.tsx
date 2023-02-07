@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm, UseFormWatch } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchSignUp } from '../../../apis/auths';
-import { AuthArea } from '../../../styles/GlobalStyle';
+import { AuthArea } from '../../../assets/styles/GlobalStyle';
 import { ISignUpForm } from '../../../types/authComponentTypes';
 import { regExpEmail } from '../../../utils/regexp';
 
