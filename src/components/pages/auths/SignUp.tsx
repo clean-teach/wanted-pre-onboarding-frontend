@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm, UseFormWatch } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { fetchSignUp } from '../../../apis/api';
+import { Link, useNavigate } from 'react-router-dom';
+import { fetchSignUp } from '../../../apis/auths';
 import { AuthArea } from '../../../styles/GlobalStyle';
 import { ISignUpForm } from '../../../types/authComponentTypes';
 import { regExpEmail } from '../../../utils/regexp';
@@ -11,7 +11,7 @@ function SignUp() {
   const [fetchError, setFetchError] = useState(null);
   const navigate = useNavigate();
 
-  const getValidSignInFrom = (watch: UseFormWatch<ISignUpForm>) => {
+  const getValidSignUpFrom = (watch: UseFormWatch<ISignUpForm>) => {
     const successEmail = regExpEmail.test(watch().email);
     const successPassword = watch().password?.length >= 8;
     const successPasswordConfirm =
@@ -28,7 +28,7 @@ function SignUp() {
     ];
   };
   const [successEmail, successPassword, successPasswordConfirm, successInput] =
-    getValidSignInFrom(watch);
+    getValidSignUpFrom(watch);
 
   const handleSignUp = (inputData: ISignUpForm) => {
     fetchSignUp({
@@ -94,13 +94,18 @@ function SignUp() {
           />
           <label htmlFor="confirmPasswordInput">Confirm Password</label>
         </div>
-        {successInput ? (
-          <button type="submit" data-testid="signup-button">
-            회원가입
-          </button>
-        ) : null}
+        <button
+          type="submit"
+          data-testid="signup-button"
+          disabled={successInput ? false : true}
+        >
+          회원가입
+        </button>
         {fetchError ? <p className="warning">{fetchError}</p> : null}
       </form>
+      <div className="link-area">
+        <Link to="/signin">계정이 있으신가요?</Link>
+      </div>
     </AuthArea>
   );
 }

@@ -150,4 +150,11 @@ export const AuthArea = styled.div`
       }
     }
   }
+  .link-area {
+    margin-top: 1rem;
+    border-top: 1px solid #eaeaea;
+    padding-top: 1rem;
+    width: 560px;
+    text-align: center;
+  }
 `;
