@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm, UseFormWatch } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchSignIn } from '../../../apis/auths';
+import { fetchSignIn } from '../../../apis/auth';
 import { AuthArea } from '../../../assets/styles/GlobalStyle';
 import { ISignInForm } from '../../../types/authComponentTypes';
 import { regExpEmail } from '../../../utils/regexp';
@@ -41,7 +41,7 @@ function SignIn() {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         setFetchError(error.response.data.message);
       });
   };

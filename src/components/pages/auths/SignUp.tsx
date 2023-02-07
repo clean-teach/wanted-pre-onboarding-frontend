@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm, UseFormWatch } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchSignUp } from '../../../apis/auths';
+import { fetchSignUp } from '../../../apis/auth';
 import { AuthArea } from '../../../assets/styles/GlobalStyle';
 import { ISignUpForm } from '../../../types/authComponentTypes';
 import { regExpEmail } from '../../../utils/regexp';
@@ -41,7 +41,7 @@ function SignUp() {
         navigate('/signin');
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         setFetchError(error.response.data.message);
       });
   };
