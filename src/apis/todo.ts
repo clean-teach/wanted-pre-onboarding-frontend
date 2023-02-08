@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  IPropsDeleteTodos,
   IPropsGetTodos,
   IPropsPostTodos,
   IPropsPutTodos,
@@ -29,6 +30,7 @@ export const fetchGetTodos = async ({ access_token }: IPropsGetTodos) => {
     },
   });
 };
+
 export const fetchUpdateTodo = async ({
   access_token,
   id,
@@ -48,4 +50,15 @@ export const fetchUpdateTodo = async ({
       },
     },
   );
+};
+
+export const fetchDeleteTodo = async ({
+  access_token,
+  id,
+}: IPropsDeleteTodos) => {
+  return await axios.delete(`${API_FETCH_BASE_URL}todos/${id}`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
 };

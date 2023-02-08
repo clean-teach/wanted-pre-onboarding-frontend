@@ -4,7 +4,7 @@ import { Box } from '../../assets/styles/GlobalStyle';
 import { ITodo } from '../../types/atomsTypes';
 import { useRecoilState } from 'recoil';
 import { atomTodos } from '../../atoms/atoms';
-import { fetchUpdateTodo } from '../../apis/todo';
+import { fetchDeleteTodo, fetchUpdateTodo } from '../../apis/todo';
 import { error } from 'console';
 
 const Wrapper = styled(Box)`
@@ -57,11 +57,20 @@ function TodoItem({ access_token, todoData }: IProps) {
       })
       .catch((error) => console.error(error));
   };
-  const handleToggleModifyMode = () => {};
   const handleRemove = () => {
     if (confirm('정말 삭제 하시겠습니까?')) {
+      fetchDeleteTodo({ access_token, id })
+        .then((response) => {
+          if (response.status === 204) {
+            setTodos((oldTodos) => {
+              return oldTodos.filter((todo) => todo.id !== id);
+            });
+          }
+        })
+        .catch((error) => console.error(error));
     }
   };
+  const handleToggleModifyMode = () => {};
 
   return (
     <Wrapper as="li">

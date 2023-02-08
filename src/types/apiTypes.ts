@@ -15,3 +15,7 @@ export interface IPropsPutTodos {
   todo: string;
   isCompleted: boolean;
 }
+export interface IPropsDeleteTodos {
+  access_token: string;
+  id: number;
+}
