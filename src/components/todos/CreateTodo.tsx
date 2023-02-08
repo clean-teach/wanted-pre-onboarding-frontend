@@ -32,9 +32,10 @@ interface IProps {
 }
 
 function CreateTodo({ access_token }: IProps) {
+  const setTodos = useSetRecoilState(atomTodos);
+
   const { register, watch, handleSubmit, setValue } =
     useForm<ICreateTodoForm>();
-  const setTodos = useSetRecoilState(atomTodos);
 
   const handleCreateTodo = ({ newTodoContent }: ICreateTodoForm) => {
     fetchCreateTodo({ access_token, todo: newTodoContent })

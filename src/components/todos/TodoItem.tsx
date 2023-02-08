@@ -6,6 +6,9 @@ import { useRecoilState } from 'recoil';
 import { atomTodos } from '../../atoms/atoms';
 import { fetchDeleteTodo, fetchUpdateTodo } from '../../apis/todo';
 import { error } from 'console';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { ICreateTodoForm } from '../../types/todoComponentTypes';
 
 const Wrapper = styled(Box)`
   width: 100%;
@@ -42,8 +45,16 @@ interface IProps {
 
 function TodoItem({ access_token, todoData }: IProps) {
   const [todos, setTodos] = useRecoilState(atomTodos);
+  const [isModifyMode, setModifyMode] = useState(false);
 
   const { id, todo, isCompleted } = todoData;
+
+  const { register, watch, handleSubmit } = useForm<ICreateTodoForm>({
+    defaultValues: {
+      newTodoContent: todos.find((todo) => todo.id === id)?.todo,
+    },
+  });
+
   const handleCheck = () => {
     fetchUpdateTodo({ access_token, id, todo, isCompleted: !isCompleted })
       .then((response) => {
@@ -70,28 +81,71 @@ function TodoItem({ access_token, todoData }: IProps) {
         .catch((error) => console.error(error));
     }
   };
-  const handleToggleModifyMode = () => {};
+  const handleToggleModifyMode = () => {
+    setModifyMode((current) => !current);
+  };
+  const handleModifyTodo = ({ newTodoContent }: ICreateTodoForm) => {
+    fetchUpdateTodo({ access_token, id, todo: newTodoContent, isCompleted })
+      .then((response) => {
+        setTodos((oldTodos) => {
+          return oldTodos.map((todo) =>
+            todo.id === id ? { ...todo, todo: response.data.todo } : todo,
+          );
+        });
+        setModifyMode((current) => !current);
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <Wrapper as="li">
       <input type="checkbox" checked={isCompleted} onChange={handleCheck} />
-      {todo}
-      <ButtonArea>
-        <button
-          type="button"
-          data-testid="modify-button"
-          onClick={handleToggleModifyMode}
-        >
-          수정
-        </button>
-        <button
-          type="button"
-          data-testid="delete-button"
-          onClick={handleRemove}
-        >
-          삭제
-        </button>
-      </ButtonArea>
+      {isModifyMode ? (
+        <form onSubmit={handleSubmit(handleModifyTodo)}>
+          <input
+            type="text"
+            {...register('newTodoContent', {
+              required: '할 일을 입력해 주세요.',
+              maxLength: 20,
+            })}
+          />
+          {watch().newTodoContent?.length > 20 && (
+            <p className="warning">할 일은 20자 이내로 작성해 주세요</p>
+          )}
+          <ButtonArea>
+            <button type="submit" data-testid="submit-button">
+              제출
+            </button>
+            <button
+              type="button"
+              data-testid="cancel-button"
+              onClick={handleToggleModifyMode}
+            >
+              취소
+            </button>
+          </ButtonArea>
+        </form>
+      ) : (
+        <>
+          {todo}
+          <ButtonArea>
+            <button
+              type="button"
+              data-testid="modify-button"
+              onClick={handleToggleModifyMode}
+            >
+              수정
+            </button>
+            <button
+              type="button"
+              data-testid="delete-button"
+              onClick={handleRemove}
+            >
+              삭제
+            </button>
+          </ButtonArea>
+        </>
+      )}
     </Wrapper>
   );
 }
