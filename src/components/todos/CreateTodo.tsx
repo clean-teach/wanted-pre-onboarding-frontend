@@ -4,8 +4,9 @@ import { fetchCreateTodo } from '../../apis/todo';
 import { ICreateTodoForm } from '../../types/todoComponentTypes';
 import { useSetRecoilState } from 'recoil';
 import { atomTodos } from '../../atoms/atoms';
+import { Box } from '../../assets/styles/GlobalStyle';
 
-const Wrapper = styled.div`
+const Wrapper = styled(Box)`
   width: 100%;
   h3 {
     display: none;
@@ -31,13 +32,8 @@ interface IProps {
 }
 
 function CreateTodo({ access_token }: IProps) {
-  const {
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<ICreateTodoForm>();
+  const { register, watch, handleSubmit, setValue } =
+    useForm<ICreateTodoForm>();
   const setTodos = useSetRecoilState(atomTodos);
 
   const handleCreateTodo = ({ newTodoContent }: ICreateTodoForm) => {
@@ -51,8 +47,9 @@ function CreateTodo({ access_token }: IProps) {
           userId,
         };
         setTodos((oldTodos) => {
-          return oldTodos.concat(newTodo);
+          return oldTodos.concat(newTodo).reverse();
         });
+        setValue('newTodoContent', '');
       })
       .catch((error) => console.error(error));
   };
@@ -62,6 +59,7 @@ function CreateTodo({ access_token }: IProps) {
       <h3>할 일 목록 생성</h3>
       <form onSubmit={handleSubmit(handleCreateTodo)}>
         <input
+          type="text"
           data-testid="new-todo-input"
           {...register('newTodoContent', {
             required: '할 일을 입력해 주세요.',

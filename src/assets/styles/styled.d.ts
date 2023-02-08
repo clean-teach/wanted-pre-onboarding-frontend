@@ -10,7 +10,8 @@ declare module 'styled-components' {
     negativePointColor: string;
     negativeAssistanceColor: string;
     negativeDominantColor: string;
-    bgColor: string;
+    bgColor1: string;
+    bgColor2: string;
     txtColor: string;
     borderColor: string;
     grayColor: string;

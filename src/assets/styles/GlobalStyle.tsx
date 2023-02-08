@@ -55,9 +55,10 @@ table {
 body {
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.bgColor2};
   color: ${(props) => props.theme.txtColor};
   line-height: 1.2;
+  padding-top: 4rem;
 }
 a {
   text-decoration:none;
@@ -71,7 +72,7 @@ button {
   cursor: pointer;
   border: none;
   background: ${(props) => props.theme.pointColor};
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.bgColor1};
   border-radius:0.25rem ;
   &:disabled {
     cursor: default;
@@ -105,6 +106,9 @@ input[type='text'], input[type='password'], input[type='email'], textarea {
     border-width: .125rem;
     /* background-color: ${(props) => props.theme.dominantColor}; */
   }
+}
+input[type='checkbox'], input[type='radio'] {
+  cursor: pointer;
 }
 p.warning {
   color: ${(props) => props.theme.negativePointColor};
@@ -157,4 +161,11 @@ export const AuthArea = styled.div`
     width: 560px;
     text-align: center;
   }
+`;
+
+export const Box = styled.div`
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: ${(props) => props.theme.bgColor1};
 `;

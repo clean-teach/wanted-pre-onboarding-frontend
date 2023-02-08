@@ -9,3 +9,9 @@ export interface IPropsPostTodos {
 export interface IPropsGetTodos {
   access_token: string;
 }
+export interface IPropsPutTodos {
+  access_token: string;
+  id: number;
+  todo: string;
+  isCompleted: boolean;
+}

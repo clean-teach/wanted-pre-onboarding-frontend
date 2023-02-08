@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { IPropsGetTodos, IPropsPostTodos } from '../types/apiTypes';
+import {
+  IPropsGetTodos,
+  IPropsPostTodos,
+  IPropsPutTodos,
+} from '../types/apiTypes';
 import { API_FETCH_BASE_URL } from '../utils/strings';
 
 export const fetchCreateTodo = async ({
@@ -24,4 +28,24 @@ export const fetchGetTodos = async ({ access_token }: IPropsGetTodos) => {
       Authorization: `Bearer ${access_token}`,
     },
   });
+};
+export const fetchUpdateTodo = async ({
+  access_token,
+  id,
+  todo,
+  isCompleted,
+}: IPropsPutTodos) => {
+  return await axios.put(
+    `${API_FETCH_BASE_URL}todos/${id}`,
+    {
+      todo,
+      isCompleted,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        'Content-Type': 'application/json',
+      },
+    },
+  );
 };
