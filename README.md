@@ -20,7 +20,7 @@
 
 ### 배포 링크
 
-[https://clean-teach.github.io/wanted-pre-onboarding-frontend/todo](https://clean-teach.github.io/wanted-pre-onboarding-frontend/todo)
+[https://clean-teach.github.io/wanted-pre-onboarding-frontend](https://clean-teach.github.io/wanted-pre-onboarding-frontend)
 
 ### 로컬 실행 방법
 
