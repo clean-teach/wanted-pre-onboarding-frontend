@@ -34,8 +34,13 @@ interface IProps {
 function CreateTodo({ access_token }: IProps) {
   const setTodos = useSetRecoilState(atomTodos);
 
-  const { register, watch, handleSubmit, setValue } =
-    useForm<ICreateTodoForm>();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<ICreateTodoForm>();
 
   const handleCreateTodo = ({ newTodoContent }: ICreateTodoForm) => {
     fetchCreateTodo({ access_token, todo: newTodoContent })
@@ -52,7 +57,9 @@ function CreateTodo({ access_token }: IProps) {
         });
         setValue('newTodoContent', '');
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -71,6 +78,9 @@ function CreateTodo({ access_token }: IProps) {
         {watch().newTodoContent?.length > 20 && (
           <p className="warning">할 일은 20자 이내로 작성해 주세요</p>
         )}
+        {errors ? (
+          <p className="warning">{errors.newTodoContent?.message}</p>
+        ) : null}
         <button type="submit" data-testid="new-todo-add-button">
           할 일 생성
         </button>

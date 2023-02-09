@@ -10,7 +10,7 @@ import { useSetRecoilState } from 'recoil';
 import { atomIsAccess } from '../../../atoms/atoms';
 
 function SignIn() {
-  const [fetchError, setFetchError] = useState(null);
+  const [fetchError, setFetchError] = useState<string | null>(null);
   const { register, watch, handleSubmit } = useForm<ISignInForm>();
   const navigate = useNavigate();
   const IsAccess = useSetRecoilState(atomIsAccess);
@@ -42,7 +42,11 @@ function SignIn() {
       })
       .catch((error) => {
         console.error(error);
-        setFetchError(error.response.data.message);
+        setFetchError(
+          error.response.status === 401
+            ? '아이디 or 패스워드를 확인해주세요.'
+            : null,
+        );
       });
   };
 
@@ -61,7 +65,7 @@ function SignIn() {
               pattern: regExpEmail,
             })}
             autoFocus={true}
-            className={successEmail ? 'success' : undefined}
+            className={successEmail ? 'success' : ''}
           />
           <label htmlFor="emailInput">E-mail</label>
         </div>
@@ -75,7 +79,7 @@ function SignIn() {
               required: '비밀번호는 8자리 이상이어야 합니다.',
               minLength: 8,
             })}
-            className={successPassword ? 'success' : undefined}
+            className={successPassword ? 'success' : ''}
           />
           <label htmlFor="passwordInput">Password</label>
         </div>

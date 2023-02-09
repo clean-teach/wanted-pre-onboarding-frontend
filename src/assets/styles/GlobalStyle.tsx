@@ -78,10 +78,14 @@ button {
     cursor: default;
     background: ${(props) => props.theme.grayColor};
   }
-  &.cancel {
+  &.secondary {
     border: 1px solid ${(props) => props.theme.grayColor};
     background: none;
     color: ${(props) => props.theme.txtColor};
+  }
+  &.delete {
+    background: ${(props) => props.theme.negativePointColor};
+    color: ${(props) => props.theme.bgColor1};
   }
 }
 input[type='text'], input[type='password'], input[type='email'], textarea {
@@ -93,7 +97,6 @@ input[type='text'], input[type='password'], input[type='email'], textarea {
   &.warning {
     border-color: ${(props) => props.theme.negativeAssistanceColor};
     outline-color: ${(props) => props.theme.assistanceColor};
-    background-color: ${(props) => props.theme.negativeDominantColor};
     border-width: .125rem;
     &:focus {
       border-color: #333333;
@@ -122,10 +125,11 @@ export const AuthArea = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: ${(props) => props.theme.bgColor1};
   h2 {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   form {
     width: 560px;
@@ -135,6 +139,7 @@ export const AuthArea = styled.div`
     button {
       font-size: 1rem;
       padding: 1rem;
+      margin-top: 1rem;
     }
     .input-area {
       position: relative;
@@ -144,13 +149,15 @@ export const AuthArea = styled.div`
       position: absolute;
       top: 0;
       left: 1rem;
-      background-color: #ffffff;
       padding: 0 0.5rem;
-      display: none;
+      transform: scaley(0);
+      transition: 0.2s;
+      font-weight: bold;
+      background-color: ${(props) => props.theme.bgColor1};
     }
     input:focus {
       & + label {
-        display: block;
+        transform: scaley(1);
       }
     }
   }

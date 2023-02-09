@@ -15,27 +15,38 @@ const Wrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-content: center;
-
+  flex-wrap: wrap;
+  gap: 1rem;
   & + & {
     margin-top: 1rem;
   }
-  &.isClicked {
-    font-weight: bold;
-    transform: scale(1.04);
-    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.4);
-    transition: 0.2s;
-  }
-  a {
+  .text {
     display: flex;
     align-items: center;
-    &:hover {
-      text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+    flex: 1;
+  }
+  form {
+    display: flex;
+    flex: 1;
+    input[type='text'],
+    input[type='password'],
+    input[type='email'],
+    textarea {
+      width: auto;
+      flex: 1;
     }
   }
 `;
 const ButtonArea = styled.div`
   padding: 0.5rem;
   background: none;
+  display: inline-block;
+  button {
+    padding: 0.25rem 0.5rem;
+    & + button {
+      margin-left: 0.5rem;
+    }
+  }
 `;
 
 interface IProps {
@@ -120,6 +131,7 @@ function TodoItem({ access_token, todoData }: IProps) {
               type="button"
               data-testid="cancel-button"
               onClick={handleToggleModifyMode}
+              className="secondary"
             >
               취소
             </button>
@@ -127,12 +139,13 @@ function TodoItem({ access_token, todoData }: IProps) {
         </form>
       ) : (
         <>
-          {todo}
+          <div className="text">{todo}</div>
           <ButtonArea>
             <button
               type="button"
               data-testid="modify-button"
               onClick={handleToggleModifyMode}
+              className="secondary"
             >
               수정
             </button>
@@ -140,6 +153,7 @@ function TodoItem({ access_token, todoData }: IProps) {
               type="button"
               data-testid="delete-button"
               onClick={handleRemove}
+              className="delete"
             >
               삭제
             </button>

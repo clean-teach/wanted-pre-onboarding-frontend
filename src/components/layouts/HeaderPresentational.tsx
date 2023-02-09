@@ -37,7 +37,7 @@ function HeaderPresentational({ isAccess, onLogOut }: IProps) {
       <Title>원티드 프리온보딩 챌린지 프론트엔드 코스 사전과제 : 김청훈</Title>
       <nav>
         {isAccess && (
-          <Btn as="button" onClick={onLogOut}>
+          <Btn as="button" onClick={onLogOut} className="secondary">
             로그아웃
           </Btn>
         )}
