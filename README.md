@@ -1,4 +1,4 @@
-# 원티드 프리온보딩 챌린지 프론트엔드 코스 사전과제 : 김청훈
+# 안녕하세요! **김청훈** 의 원티드 프리온보딩 챌린지 프론트엔드 코스 사전과제입니다.
 
 ## 개요
 
@@ -24,8 +24,8 @@
 
 ### 로컬 실행 방법
 
-1. 컴퓨터에 레파지토리 받기
-2. 터미털 창에서 해당 경로로 이동 후 `yarn start`로 로컬 서버 실행
+1. 컴퓨터에 레파지토리 받아주세요.
+2. `yarn start`
 
 <br/>
 
@@ -102,15 +102,26 @@
 
 ## 설치 패키지 및 개발 환경
 
-- `create-react-app` : 리액트 쉽게 사용
-- `typescript` : 타입으로 보호되는 안전한 코딩
-- `react-router-dom@6.4` : 싱글 페이지 어플리케이션에서 라우트 별로 페이지를 나눠서 관리
-- `styled-components` : 컴포넌트 별 스타일 설정
-  - `npm i --save-dev @types/styled-components` : 타입 스크립트 환경에서 `styled-components` 사용
-- `react-hook-form` : 리액트환경에서 Form UI 쉽게 관리
-- `axios` : API Fetch 작업 편리하게 하기
-- `recoil` : atom 단위 전역 상태관리
-- `gh-pages` : 배포
+- `create-react-app` :
+  - 리액트 쉽게 사용 할 수 있습니다.
+  - `React.js`
+    - 컴포넌트 기반으로 재사용성을 고려한 코드 개발이 가능합니다.
+    - JSX를 통해 선언형 구조를 나타내기 쉽습니다.
+- `typescript` :
+  - 타입으로 보호되는 안전한 코딩을 할 수 있습니다.
+  - 컴파일 단계에서 오류 확인이 가능합니다.
+  - 타입 추론을 통해 코드 생산성, 가독성을 높일 수 있습니다.
+- `react-router-dom@6.4` : 싱글 페이지 어플리케이션에서 라우트 별로 페이지를 나눠서 관리하기 위함입니다.
+- `styled-components` :
+  - 컴포넌트 별 스타일 설정 할 수 있습니다.
+  - 'CSS IN JS' 방식으로 원하는 스타일을 적재적소에 추가할 수 있습니다.
+  - `npm i --save-dev @types/styled-components` : 타입 스크립트 환경에서 `styled-components`를 사용하기 위함입니다.
+- `react-hook-form` : 리액트환경에서 Form UI 쉽게 관리 할 수 있습니다.
+- `axios` : API Fetch 작업을 편리하게 할 수 있습니다.
+- `recoil` : atom 단위 전역 상태관리을 할 수 있습니다.
+- `gh-pages` :
+  - Git Hub 와 연동하여 편리하게 배포 할 수 있습니다.
+  - 무료로 레파지토리 별로 여러개의 페이지를 배포 할 수 있습니다.
 
 <br/>
 
