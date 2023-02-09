@@ -1,13 +1,11 @@
 /* eslint-disable no-restricted-globals */
 import styled from 'styled-components';
 import { Box } from '../../assets/styles/GlobalStyle';
-import { ITodo } from '../../types/atomsTypes';
-import { useRecoilState } from 'recoil';
-import { atomTodos } from '../../atoms/atoms';
-import { fetchDeleteTodo, fetchUpdateTodo } from '../../apis/todo';
-import { error } from 'console';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import {
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormWatch,
+} from 'react-hook-form';
 import { ICreateTodoForm } from '../../types/todoComponentTypes';
 
 const Wrapper = styled(Box)`
@@ -50,62 +48,32 @@ const ButtonArea = styled.div`
 `;
 
 interface IProps {
-  access_token: string;
-  todoData: ITodo;
+  register: UseFormRegister<ICreateTodoForm>;
+  watch: UseFormWatch<ICreateTodoForm>;
+  handleSubmit: UseFormHandleSubmit<ICreateTodoForm>;
+  handleModifyTodo: ({ newTodoContent }: ICreateTodoForm) => void;
+  handleCheck: () => void;
+  handleRemove: () => void;
+  isModifyMode: boolean;
+  setModifyMode: React.Dispatch<React.SetStateAction<boolean>>;
+  isCompleted: boolean;
+  todo: string;
 }
 
-function TodoItem({ access_token, todoData }: IProps) {
-  const [todos, setTodos] = useRecoilState(atomTodos);
-  const [isModifyMode, setModifyMode] = useState(false);
-
-  const { id, todo, isCompleted } = todoData;
-
-  const { register, watch, handleSubmit } = useForm<ICreateTodoForm>({
-    defaultValues: {
-      newTodoContent: todos.find((todo) => todo.id === id)?.todo,
-    },
-  });
-
-  const handleCheck = () => {
-    fetchUpdateTodo({ access_token, id, todo, isCompleted: !isCompleted })
-      .then((response) => {
-        setTodos((oldTodos) => {
-          return oldTodos.map((todo) =>
-            todo.id === id
-              ? { ...todo, isCompleted: response.data.isCompleted }
-              : todo,
-          );
-        });
-      })
-      .catch((error) => console.error(error));
-  };
-  const handleRemove = () => {
-    if (confirm('정말 삭제 하시겠습니까?')) {
-      fetchDeleteTodo({ access_token, id })
-        .then((response) => {
-          if (response.status === 204) {
-            setTodos((oldTodos) => {
-              return oldTodos.filter((todo) => todo.id !== id);
-            });
-          }
-        })
-        .catch((error) => console.error(error));
-    }
-  };
+function TodoItemPresentational({
+  register,
+  watch,
+  handleSubmit,
+  handleModifyTodo,
+  handleCheck,
+  handleRemove,
+  isModifyMode,
+  setModifyMode,
+  isCompleted,
+  todo,
+}: IProps) {
   const handleToggleModifyMode = () => {
     setModifyMode((current) => !current);
-  };
-  const handleModifyTodo = ({ newTodoContent }: ICreateTodoForm) => {
-    fetchUpdateTodo({ access_token, id, todo: newTodoContent, isCompleted })
-      .then((response) => {
-        setTodos((oldTodos) => {
-          return oldTodos.map((todo) =>
-            todo.id === id ? { ...todo, todo: response.data.todo } : todo,
-          );
-        });
-        setModifyMode((current) => !current);
-      })
-      .catch((error) => console.error(error));
   };
 
   return (
@@ -164,4 +132,4 @@ function TodoItem({ access_token, todoData }: IProps) {
   );
 }
 
-export default TodoItem;
+export default TodoItemPresentational;

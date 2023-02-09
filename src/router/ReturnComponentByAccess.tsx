@@ -1,15 +1,15 @@
 import { useRecoilValue } from 'recoil';
 import { atomIsAccess } from '../atoms/atoms';
-import TodoList from '../components/pages/todos/TodoList';
-import SignIn from '../components/pages/auths/SignIn';
+import SignInContainer from '../components/pages/auths/SignInContainer';
+import TodoListContainer from '../components/pages/todos/TodoListContainer';
 
 function ReturnComponentByAccess() {
   const isAccess = useRecoilValue(atomIsAccess);
 
   if (isAccess) {
-    return <TodoList />;
+    return <TodoListContainer />;
   } else {
-    return <SignIn />;
+    return <SignInContainer />;
   }
 }
 

@@ -1,50 +1,32 @@
-import { useState } from 'react';
-import { useForm, UseFormWatch } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { fetchSignUp } from '../../../apis/auth';
+import {
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormWatch,
+} from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { AuthArea } from '../../../assets/styles/GlobalStyle';
 import { ISignUpForm } from '../../../types/authComponentTypes';
 import { regExpEmail } from '../../../utils/regexp';
 
-function SignUp() {
-  const { register, watch, handleSubmit } = useForm<ISignUpForm>();
-  const [fetchError, setFetchError] = useState(null);
-  const navigate = useNavigate();
+interface IProps {
+  register: UseFormRegister<ISignUpForm>;
+  watch: UseFormWatch<ISignUpForm>;
+  handleSubmit: UseFormHandleSubmit<ISignUpForm>;
+  handleSignUp: (inputData: ISignUpForm) => void;
+  getValidSignUpFrom: (watch: UseFormWatch<ISignUpForm>) => boolean[];
+  fetchError: string | null;
+}
 
-  const getValidSignUpFrom = (watch: UseFormWatch<ISignUpForm>) => {
-    const successEmail = regExpEmail.test(watch().email);
-    const successPassword = watch().password?.length >= 8;
-    const successPasswordConfirm =
-      watch().confirmPassword?.length >= 8 &&
-      watch().password === watch().confirmPassword;
-    const successInput =
-      successEmail && successPassword && successPasswordConfirm;
-
-    return [
-      successEmail,
-      successPassword,
-      successPasswordConfirm,
-      successInput,
-    ];
-  };
+function SignUpPresentational({
+  register,
+  watch,
+  handleSubmit,
+  handleSignUp,
+  getValidSignUpFrom,
+  fetchError,
+}: IProps) {
   const [successEmail, successPassword, successPasswordConfirm, successInput] =
     getValidSignUpFrom(watch);
-
-  const handleSignUp = (inputData: ISignUpForm) => {
-    fetchSignUp({
-      email: inputData.email,
-      password: inputData.password,
-    })
-      .then((response) => {
-        console.log(response);
-        alert('회원가입이 완료 되었습니다.');
-        navigate('/signin');
-      })
-      .catch((error) => {
-        console.error(error);
-        setFetchError(error.response.data.message);
-      });
-  };
 
   return (
     <AuthArea>
@@ -110,4 +92,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPresentational;

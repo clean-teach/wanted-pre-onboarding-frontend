@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../components/App';
-import SignUp from '../components/pages/auths/SignUp';
-import SignIn from '../components/pages/auths/SignIn';
 import ReturnComponentByAccess from './ReturnComponentByAccess';
+import SignInContainer from '../components/pages/auths/SignInContainer';
+import SignUpContainer from '../components/pages/auths/SignUpContainer';
 
 const router = createBrowserRouter([
   {
@@ -11,11 +11,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/signup',
-        element: <SignUp />,
+        element: <SignUpContainer />,
       },
       {
         path: '/signin',
-        element: <SignIn />,
+        element: <SignInContainer />,
       },
       {
         path: '/todo',
